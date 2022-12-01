@@ -27,8 +27,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['194.67.97.123',]
-
+ALLOWED_HOSTS = ['194.67.97.123', 'ilya-shevelev.ru', 'www.ilya-shevelev.ru']
 
 # Application definition
 
