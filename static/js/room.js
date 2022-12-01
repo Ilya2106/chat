@@ -52,7 +52,7 @@ onlineUsersSelector.onchange = function () {
 let chatSocket = null;
 
 function connect() {
-    chatSocket = new WebSocket("ws://" + window.location.host + "/ws/chat/" + roomName + ":8001/");
+    chatSocket = new WebSocket("wss://" + window.location.host + "/ws/chat/" + roomName + ":8001/");
 
     chatSocket.onopen = function (e) {
         console.log("Successfully connected to the WebSocket.");
