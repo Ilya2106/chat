@@ -32,15 +32,6 @@ chatMessageInput.onkeyup = function (e) {
     }
 };
 
-// clear the 'chatMessageInput' and forward the message
-chatMessageSend.onclick = function () {
-    if (chatMessageInput.value.length === 0) return;
-    chatSocket.send(JSON.stringify({
-        "message": chatMessageInput.value,
-    }));
-    chatMessageInput.value = "";
-};
-
 onlineUsersSelector.onchange = function () {
     chatMessageInput.value = "/pm " + onlineUsersSelector.value + " ";
     onlineUsersSelector.value = null;
@@ -72,7 +63,7 @@ function connect() {
 
         switch (data.type) {
             case "chat_message":
-                chatLog.value += data.user + ": " + data.message + "\n";  // new
+                chatLog.value += data.user + ": " + data.message + "\n";
                 break;
             case "user_list":
                 for (let i = 0; i < data.users.length; i++) {
@@ -106,6 +97,15 @@ function connect() {
         console.log("WebSocket encountered an error: " + err.message);
         console.log("Closing the socket.");
         chatSocket.close();
-    }
-}
+    };
+    
+    // clear the 'chatMessageInput' and forward the message
+    chatMessageSend.onclick = function () {
+        if (chatMessageInput.value.length === 0) return;
+        chatSocket.send(JSON.stringify({
+            "message": chatMessageInput.value,
+        }));
+        chatMessageInput.value = "";
+    };
+};
 connect();
